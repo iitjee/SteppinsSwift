@@ -9,10 +9,10 @@
 /* Class Initialization */
 class VideoMode {
     var resolution = Resolution() 
-    var interlaced = false
-    var frameRate = 0.0
-    var name: String?
-    var company: String
+    var interlaced = false  //default value of false
+    var frameRate = 0.0     //default value of 0.0
+    var name: String?       //default value of nil
+    var company: String     //default value given in initializer ("Canon")
     
  
     
@@ -100,6 +100,10 @@ if tenEighty === alsoTenEighty {
 
 //If a property marked with the lazy modifier is accessed by multiple threads simultaneously and the property has not yet been initialized, there is no guarantee that the property will be initialized only once.
 
+
+/*  Static Methods  */
+//Static methods cannot be overridden by subclasses. => acting like 'final'
+//Static methods are lazy by default.
 
 /* Deinitializtion  */
 //Unlike in langs like Java or C# where unused variables are cleared at some "random point of time" (Called Garbage Collection) in Swift, you exactly know when the variable is being cleared. (Called Reference Counting)
