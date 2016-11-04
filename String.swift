@@ -54,23 +54,19 @@ let message = "\(multiplier) times 2.5 is \(Double(multiplier) * 2.5)"
 // message is "3 times 2.5 is 7.5"
 
     
-/* String Indices */    /*1)myStr.startIndex  2)myStr.endIndex  3)myStr.index(before:)  4)myStr.index(after:) 5)myStr.index(_, offsetBy:)
+/* String Indices */    /*1)myStr.startIndex  2)myStr.endIndex  3)myStr.index(before:)  4)myStr.index(after:) 5)myStr.index(_, offsetBy:) */
 let greeting = "Guten Tag!"
-greeting[greeting.startIndex]
-// G
-greeting[greeting.index(before: greeting.endIndex)]
-// !  //Note that myStr.endIndex gives the index after the last element. Hence we never use it directly
-greeting[greeting.index(after: greeting.startIndex)]
-// u
+greeting[greeting.startIndex]   // G
+greeting[greeting.index(before: greeting.endIndex)]// !  
+//Note that myStr.endIndex gives the index after the last element. Hence we never use it directly
+greeting[greeting.index(after: greeting.startIndex)]    // u
 let index = greeting.index(greeting.startIndex, offsetBy: 7)
-greeting[index]
-// a
+greeting[index] // a
 
 //Use the indices property of the characters property to access all of the indices of individual characters in a string.
 for index in greeting.characters.indices {
     print("\(greeting[index]) ", terminator: "")
-}
-// Prints "G u t e n   T a g ! "
+}   // Prints "G u t e n   T a g ! "
 
 /*  Inserting and Removing  */  1) welcome.insert(_, at:) 2)myStr.insert(ContentsOf: at:)
 var welcome = "hello"
