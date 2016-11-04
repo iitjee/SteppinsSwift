@@ -3,6 +3,7 @@ https://developer.apple.com/library/content/documentation/Swift/Conceptual/Swift
 
 1. Even for single if statement, you've to put braces
 2. Switch statements doesn't suffer from fallthrough
+3. It's mandatory to put a default case in Switch statements to make sure it's exhaustive.
 
 */
 
@@ -36,7 +37,32 @@ outerLabel: if someCondition {
 }
 
 /* Switch-Case statement  */
+let someItem: Character = "w"
 
+switch someItem {
+    case "a", "e", "i", "o", "u":
+        print("Letter is vowel")
+    
+    case "a"..."z":
+        print("Letter is consonant")
+        
+    default:
+        print("It's not an alphabet")
+}
+//Note that there is no `break` in cases. Also, one can use the keyword `fallthrough` if you need that behavior
+
+let someItem: Character = "w"
+
+switch someItem {
+    case "a", "e", "i", "o", "u":
+        print("Letter is vowel")
+    
+    case "a"..."z":
+        fallthrough
+  
+    default:
+        print("Letter is a consonant")
+}
 
 
 
