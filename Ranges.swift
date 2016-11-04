@@ -10,7 +10,7 @@
 
 
 
-"a"..."d" //a, d (no intermediate values)
+"a"..."d" //all values between and including a and d. However, you can't use directly in a for-in statement
 UnicodeScalar("a").value...UnicodeScalar("d").value //97, 98, 99, 100 (get the difference?)
 
 
