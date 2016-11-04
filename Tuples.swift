@@ -41,6 +41,7 @@ func fetch() -> (code: Int, desc: String) {
   //Another way
   let tempstatus = fetch()
   let status = (errorCode: tempstatus.0, descrip: tempstatus.1)
+//(or)   let status = (errorCode: fetch().0, descrip: fetch().1) //if function calls are not too expensive
   status.errorCode
   status.descrip
   
