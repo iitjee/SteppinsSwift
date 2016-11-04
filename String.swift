@@ -3,6 +3,8 @@
 /*  Important Points:
 myStr.startIndex != 0       It is some other object. For simplicity you can think of it as a start iterator.
 
+UnicodeScalar("a").value    //97
+UnicodeScalar(97)   //"a"?  (i.e optional a)  
 
 
 
