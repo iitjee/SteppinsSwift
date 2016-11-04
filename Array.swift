@@ -34,15 +34,22 @@ let mapleSyrup = shoppingList.remove(at: 0) //array elements are readjusted to a
 let apples = shoppingList.removeLast()
 
 
-/*Iterating over array  */
+/*Iterating over array using for-in */
 for item in shoppingList {
     print(item)
 }
-for (index, value) in shoppingList.enumerated() {
-    print("Item \(index + 1): \(value)")
+for (index, value) in shoppingList.enumerated() {   //If you need the integer index of each item as well as its value(the enumerated() method returns a tuple composed of an integer and the item.)
+    print("Item \(index + 1): \(value)")    //The integers start at zero and count up by one for each item
 }
 
+/*Iterating over array using for */
+for i in 0..<shoppingList.count {
+    print(shoppingList[i])
+}
 
+for var i=0; i<shoppingList.count; ++i {    //very old style
+    print(shoppingList[i])
+}
 
 
 
