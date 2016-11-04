@@ -12,6 +12,6 @@
 
 "a"..."d" //all values between and including a and d. However, you can't use directly in a for-in statement
 UnicodeScalar("a").value...UnicodeScalar("d").value //97, 98, 99, 100 (get the difference?)
+UnicodeScalar(98) //"b"
 
-
-"vikhyath"..."viki" //only "vikhyath" and "viki"
+"vikhyath"..."viki" 
