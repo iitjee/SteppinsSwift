@@ -1,0 +1,124 @@
+/*
+1. By default, the parameters are `constants` unless declared with a var keyword
+2. You can also pass tuples as arguments func myF(x: (Int, Int))
+
+
+
+*/
+
+
+
+
+func greet(person: String) -> String {  //Note that person is a constant string
+    let greeting = "Hello, " + person + "!"
+    return greeting
+}
+print(greet(person: "Anna"))
+
+func greet(var person: String) -> String {  //Note that person is now a variable string
+    var person = "Hello, " + person + "!"
+    return person
+}
+print(greet(person: "Anna"))
+
+/* Functions with no return values  */
+func greet(person: String) {
+    print("Hello, \(person)!")
+}
+//Note: Strictly speaking the function is still returning a value of type Void which is an empty tuple ()
+func greet(person: String) -> () { //both are same
+    print("Hello, \(person)!")
+}
+
+/*  Functions with Multiple Return Values */
+func minMax(array: [Int]) -> (min: Int, max: Int) {
+    var currentMin = array[0]
+    var currentMax = array[0]
+    for value in array[1..<array.count] {
+        if value < currentMin {
+            currentMin = value
+        } else if value > currentMax {
+            currentMax = value
+        }
+    }
+    return (currentMin, currentMax)
+}
+
+let bounds = minMax(array: [8, -6, 2, 109, 3, 71])
+print("min is \(bounds.min) and max is \(bounds.max)")
+// Prints "min is -6 and max is 109"
+//Note that the tuple’s members do not need to be named at the point that the tuple is returned from the function, because their names are already specified as part of the function’s return type.
+
+
+/*  Functions with Optional Tuple Return Types */
+// the minMax(array:) function above does not perform any safety checks on the array it is passed. If the array argument contains an empty array, the minMax(array:) function, as defined above, will trigger a runtime error when attempting to access array[0].
+
+func minMax(array: [Int]) -> (min: Int, max: Int)? {
+    if array.isEmpty { return nil }
+    var currentMin = array[0]
+    var currentMax = array[0]
+    for value in array[1..<array.count] {
+        if value < currentMin {
+            currentMin = value
+        } else if value > currentMax {
+            currentMax = value
+        }
+    }
+    return (currentMin, currentMax)
+}
+
+if let bounds = minMax(array: [8, -6, 2, 109, 3, 71]) { //Optional Binding
+    print("min is \(bounds.min) and max is \(bounds.max)")
+}
+// Prints "min is -6 and max is 109"
+
+
+/*  Function Argument Labels(aka external name) and Parameter Names(aka internal name)  (Awesome!! :))*/
+//All parameters must have unique names. Although it’s possible for multiple parameters to have the same argument label, unique argument labels help make your code more readable.
+func someFunction(argumentLabel parameterName: Int) {
+    // In the function body, parameterName refers to the argument value
+    // for that parameter.
+}
+
+func greet(person: String, from hometown: String) -> String {
+    return "Hello \(person)!  Glad you could visit from \(hometown)."
+}
+print(greet(person: "Bill", from: "Cupertino")) // Prints "Hello Bill!  Glad you could visit from Cupertino."
+//The use of argument labels can allow a function to be called in an expressive, sentence-like manner, while still providing a function body that is readable and clear in intent.
+
+//Note: If a parameter has an argument label, the argument must be labeled when you call the function.
+
+/*  Omitting Argument Labels and Parameter Names */
+func someFunction(_ firstParameterName: Int, secondParameterName: Int) {
+    // In the function body, firstParameterName and secondParameterName
+    // refer to the argument values for the first and second parameters.
+}
+someFunction(1, secondParameterName: 2)
+
+
+/*  Default Parameter Values  */
+func someFunction(parameterWithoutDefault: Int, parameterWithDefault: Int = 12) {
+    // If you omit the second argument when calling this function, then
+    // the value of parameterWithDefault is 12 inside the function body.
+}
+someFunction(parameterWithoutDefault: 3, parameterWithDefault: 6) // parameterWithDefault is 6
+someFunction(parameterWithoutDefault: 4) // parameterWithDefault is 12
+
+//Note: Since one can ignore typing the defaultParameterName, you should always keep them at last, after usual args are mentioned
+
+/*  Function overloading  */
+//If argument signature or the return signature is different, functions can be overloaded
+//Also functions with different external names with same signature are considered different
+
+func myOverload(x: Int)
+func myOverload(x: Int, y: Int) -> (Int, Int) 
+func myOverload(x: Double) -> Int
+func myOverload(a a:Int)
+func myOverload(b b:Int)
+func myOverload(c c:Int)
+
+
+
+
+
+
