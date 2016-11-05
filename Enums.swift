@@ -1,5 +1,5 @@
 /*
-
+    I think enums are usually used for type comparisons. That's why you will use lot switch-case with enums
 */
 
 
