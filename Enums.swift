@@ -32,6 +32,15 @@ case .west:
 //Note: As described in Control Flow, a switch statement must be exhaustive when considering an enumeration’s cases. If the case for .west is omitted, this code does not compile, because it does not consider the complete list of CompassPoint cases.
 //Requiring exhaustiveness ensures that enumeration cases are not accidentally omitted. (When it is not appropriate to provide a case for every enumeration case, you can provide a default case to cover any cases that are not addressed explicitly)
 
+/*  Enums in Function */
+enum Status {
+case success, failure
+}
+
+func doSomething(inout result: String) -> Status {
+    result = "New value"
+    return .success //Status.success is not mentioned because return type is already given in function declaration
+}
 
 
 /*  Associated Values   */
