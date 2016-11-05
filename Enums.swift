@@ -12,8 +12,9 @@ enum CompassPoint {
     case south
     case east, west //declaring multiple cases statements in one statement
 }
+//Now CompassPoint acts like a datatype and the possible values for this datatype are north, south, east, west. This is the best explanation bro!
 
-var directionToHead = CompassPoint.west
+var directionToHead = CompassPoint.west //(or) var directionToHead: CompassPoint = CompassPoint.west
 directionToHead = .east //The type of directionToHead is already known, and so you can drop the type when setting its value.
 
 /*  Use in switch-case Statement  */
@@ -30,6 +31,25 @@ case .west:
 
 //Note: As described in Control Flow, a switch statement must be exhaustive when considering an enumeration’s cases. If the case for .west is omitted, this code does not compile, because it does not consider the complete list of CompassPoint cases.
 //Requiring exhaustiveness ensures that enumeration cases are not accidentally omitted. (When it is not appropriate to provide a case for every enumeration case, you can provide a default case to cover any cases that are not addressed explicitly)
+
+
+
+/*  Associated Values   */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
