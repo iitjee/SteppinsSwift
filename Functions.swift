@@ -107,8 +107,19 @@ func someFunction(parameterWithoutDefault: Int, parameterWithDefault: Int = 12) 
 }
 someFunction(parameterWithoutDefault: 3, parameterWithDefault: 6) // parameterWithDefault is 6
 someFunction(parameterWithoutDefault: 4) // parameterWithDefault is 12
+//Note: Since one can ignore typing the defaultParameterName, you should always keep them at last, after the usual args are mentioned
 
-//Note: Since one can ignore typing the defaultParameterName, you should always keep them at last, after usual args are mentioned
+
+/* Arrays as arguments  */
+func concatenate(_ strings :[String], delimitingBy separator: String=", ") -> String {
+   var result = ""
+   for word in strings {
+      result += (word + separator)
+   }
+   return result
+}
+concatenate(["a", "b", "c"], delimitingBy: "\n")   //here delimited by newlien
+concatenate(["a", "b", "c"])  //here delimited by ,
 
 /*  Function overloading  */
 //If argument signature or the return signature is different, functions can be overloaded
@@ -122,8 +133,12 @@ func myOverload(b b:Int)
 func myOverload(c c:Int)
 
 /*  Tuples as arguments */
+func findCenter(start: (y: Int, x: Int), _ end: (Int, Int)) -> (y: Int, x: Int) {
+//Note that in first arg, we have given labels to tuple members which we didn't for the second arg
+   //...
+}
 
-
+findCenter(start:(1,2), (5, 2))
 
 /* Variadic Parameters  */
 //Note: A function may have at most one variadic parameter.
