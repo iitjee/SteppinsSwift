@@ -22,7 +22,7 @@ func greet(var person: String) -> String {  //Note that person is now a variable
     return person
 }
 print(greet(person: "Anna"))
-/*
+*/
 
 /* Functions with no return values  */
 func greet(person: String) {
