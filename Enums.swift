@@ -37,11 +37,10 @@ enum Status {
 case success, failure
 }
 
-func doSomething(inout result: String) -> Status {
+func doSomething(Status: status, result: String) {
     result = "New value"
-    return .success //Status.success is not mentioned because return type is already given in function declaration
+    return (.success,  result)
 }
-
 
 /*  Associated Values   */
 
