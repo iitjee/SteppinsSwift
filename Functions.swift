@@ -174,7 +174,7 @@ enum Status {
 case success, failure
 }
 
-func doSomething(inout result: String) -> Status {
+func doSomething(result: inout String) -> Status {
     result = "New value"
     return .success //Status.success is not mentioned because return type is already given in function declaration
 }
