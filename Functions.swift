@@ -3,7 +3,7 @@
 2. A function may have at most one variadic parameter
 3. In langs like C++ and C#, passing by reference is the only way to get multiple return values. However in swift we have
    tuples. So In-Out parameters are generally not used and use only when required :)
-
+4. while passing booleans as arguments while calling functions, you can do something like myFunc(myBoolArg:-2>0)
 
 */
 
@@ -16,13 +16,14 @@ func greet(person: String) -> String {  //Note that person is a constant string
 }
 print(greet(person: "Anna"))
 
-/* No more valid, You can't have var keyword used in function arguments 
-func greet(var person: String) -> String {  //Note that person is now a variable string
-    var person = "Hello, " + person + "!"
+
+func greet(person: String) -> String {  //To use person as a variable string
+    var person = "Hello, " + person + "!" //we are assigning a new local variable with same name viz `person`
     return person
 }
 print(greet(person: "Anna"))
-*/
+
+
 
 /* Functions with no return values  */
 func greet(person: String) {
