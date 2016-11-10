@@ -1,6 +1,8 @@
 /*
 
-
+Terminology:
+field/member      = stored Property (in Apple)
+property(get/set) = Computed Property (in Apple)
 
 */
 
