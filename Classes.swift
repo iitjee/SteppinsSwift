@@ -1,8 +1,15 @@
 /*
 
 Terminology:
-field/member      = stored Property (in Apple)
-property(get/set) = Computed Property (in Apple)
+field/member      = Stored Property (in Apple)   -> can be provided by classes, structures, and enumerations.
+property(get/set) = Computed Property (in Apple) -> provided only by classes and structures
+                  = Type Property (in Apple)     ->    
+
+-> Stored properties store const and var values as part of an instance, whereas computed properties calculate (rather than store) a value. 
+-> Stored and computed properties are usually associated with instances of a particular type. However, properties can also be associated with the type itself. Such properties are known as TYPE PROPERTIES.
+-> In addition, you can define PROPERTY OBSERVERS to monitor changes in a property’s value, which you can respond to with custom actions. Property observers can be added to stored properties you define yourself, and also to properties that a subclass inherits from its superclass.
+
+
 
 */
 
@@ -15,7 +22,7 @@ class VideoMode {
     var frameRate = 0.0     //default value of 0.0
     var name: String?       //default value of nil
     var company: String     //default value given in initializer ("Canon")
-    
+    let constProperty: Int  //no value initialized in definition, so user must ensure to provide a value to it when instantiating
  
     
     
@@ -50,14 +57,14 @@ class VideoMode {
     
     
     /*Lazy Variable */
-    lazy var companyInfo = Company()    //Here company is some class.  the Company instance for the companyInfo property is only created when the companyInfo property is first accessed.
+    lazy var companyInfo = Company()    //Here company is some class. The Company instance for the companyInfo property is only created when the companyInfo property is first accessed.
     
     
 }
 
 /*  Instantiation:  Classes and Structs MUST set all of their stored properties to an appropriate initial value by the time an instance of that class or Struct is created. */
 let someVideoMode = VideoMode()
-//interlaced, frameRate has default values whereas company is given value with "initializer"
+//interlaced, frameRate, name has default values whereas company is given value with "initializer"
 
 
 /* Classes are reference types  */
@@ -76,6 +83,7 @@ alsoTenEighty.frameRate = 30.0
 // and alsoTenEighty constants themselves do not actually change. 
 // tenEighty and alsoTenEighty themselves do not “store” the VideoMode instance—instead, they both refer to a VideoMode instance behind the scenes.
 // It is the frameRate property of the underlying VideoMode that is changed, not the values of the constant references to that VideoMode.
+//(However, this is not true in structs for they being value types. When an instance of a value type is marked as a constant, so are all of its properties.)
 
 /* Identity Operators(=== and !==) */
 //Because classes are reference types, it is possible for multiple constants and variables to refer to the same single instance of a class behind the scenes. (The same is not true for structures and enumerations, because they are always copied when they are assigned to a constant or variable, or passed to a function.)
@@ -93,14 +101,29 @@ if tenEighty === alsoTenEighty {
 //This behavior is different from Foundation: NSString, NSArray, and NSDictionary are implemented as classes, not structures. Strings, arrays, and dictionaries in Foundation are always assigned and passed around as a reference to an existing instance, rather than as a copy.
 // The behavior you see in your code will always be as if a copy took place. However, Swift only performs an actual copy behind the scenes when it is absolutely necessary to do so. Swift manages all value copying to ensure optimal performance, and you should not avoid assignment to try to preempt this optimization.
 
+/* Stored Properties and iVars  */
+//ObjC provides two ways to store values and references as part of a class instance. 
+//In addition to properties, you can use instance variables as a backing store for the values stored in a property.
+
+//Swift unifies these concepts into a single property declaration.
+//A Swift property does not have a corresponding instance variable, and the backing store for a property is not accessed directly.
+//This approach avoids confusion about how the value is accessed in different contexts and simplifies the property’s declaration into a single, definitive statement. 
+//All information about the property—including its name, type, and memory management characteristics—is defined in a single location as part of the type’s definition.
 
 
-/* Lazy Variable */
+
+/*   Lazy Variable   */
 //A lazy stored property is a property whose initial value is not calculated until the first time it is used. 
-//You must always declare a lazy property as a variable (with the var keyword), because its initial value might not be retrieved until after instance initialization completes. Constant properties must always have a value before initialization completes, and therefore cannot be declared as lazy.
-//Lazy properties are useful when the initial value for a property is dependent on outside factors whose values are not known until after an instance’s initialization is complete. Lazy properties are also useful when the initial value for a property requires complex or computationally expensive setup that should not be performed unless or until it is needed.
+//You must always declare a lazy property as a variable (with the var keyword), because its initial value might not be retrieved until after instance initialization completes.
+//Constant properties must always have a value before initialization completes, and therefore cannot be declared as lazy.
+//Two Uses:
+// -> when the initial value for a property is dependent on outside factors whose values are not known until after an instance’s initialization is complete. 
+// -> when the initial value for a property requires complex or computationally expensive setup that should not be performed unless or until it is needed.
 
 //If a property marked with the lazy modifier is accessed by multiple threads simultaneously and the property has not yet been initialized, there is no guarantee that the property will be initialized only once.
+
+/*  Computed Properties */
+//In addition to stored properties, classes, structures, and enumerations can define computed properties, which do not actually store a value. Instead, they provide a getter and an optional setter to retrieve and set other properties and values indirectly.
 
 
 /*  Static Methods  */
