@@ -47,4 +47,49 @@ struct Cuboid {
 let fourByFiveByTwo = Cuboid(width: 4.0, height: 5.0, depth: 2.0)
 print("the volume of fourByFiveByTwo is \(fourByFiveByTwo.volume)") //prints 40.0
 
-/* Property Observers */
+/*   Property Observers      */
+//Property observers are called every time a property’s value is set, even if the new value is the same as the property’s current value.
+//You can add property observers to any stored properties you define, except for lazy stored properties.
+//You can also add property observers to any inherited property (whether stored or computed) by overriding the property within a subclass. 
+//You don’t need to define property observers for nonoverridden computed properties, because you can observe and respond to changes to their value in the computed property’s setter.
+
+
+// - willSet is called just before the value is stored.
+    //If you implement a willSet observer, it’s passed the new property value as a constant parameter.
+    //You can name the parameter or use the default parameter name of newValue
+
+// - didSet is called immediately after the new value is stored.
+    //if you implement a didSet observer, it’s passed a constant parameter containing the old property value. 
+    //You can name the parameter or use the default parameter name of oldValue
+//Note: If you assign a value to a property within its own didSet observer, the new value that you assign replaces the one that was just set
+
+
+//IMPORTANT NOTE:The willSet and didSet observers of superclass properties are called when a property is set in a subclass initializer, after the superclass initializer has been called.
+//They are not called while a class is setting its own properties, before the superclass initializer has been called.
+
+class StepCounter {
+    var totalSteps: Int = 0 {
+        
+        willSet(newTotalSteps) {
+            print("About to set totalSteps to \(newTotalSteps)")
+        }
+        didSet {
+            if totalSteps > oldValue  { //Note that the didSet observer does not provide a custom parameter name for the old value, and the default name of oldValue is used instead.
+                print("Added \(totalSteps - oldValue) steps")
+            }
+        }
+    }
+}
+let stepCounter = StepCounter()
+stepCounter.totalSteps = 200    // About to set totalSteps to 200   // Added 200 steps
+stepCounter.totalSteps = 360    // About to set totalSteps to 360   // Added 160 steps
+stepCounter.totalSteps = 896    // About to set totalSteps to 896   // Added 536 steps
+
+
+//If you pass a property that has observers to a function as an in-out parameter, the willSet and didSet observers are always called.
+//This is because of the copy-in copy-out memory model for in-out parameters: The value is always written back to the property at the end of the function.
+
+
+
+
+
