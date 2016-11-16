@@ -53,6 +53,9 @@ print("the volume of fourByFiveByTwo is \(fourByFiveByTwo.volume)") //prints 40.
 //You can also add property observers to any inherited property (whether stored or computed) by overriding the property within a subclass. 
 //You don’t need to define property observers for nonoverridden computed properties, because you can observe and respond to changes to their value in the computed property’s setter.
 
+//IMPORTANT: When you assign a default value to a stored property, or set its initial value within an initializer, the value of that property is set directly, without calling any property observers.
+
+
 
 // - willSet is called just before the value is stored.
     //If you implement a willSet observer, it’s passed the new property value as a constant parameter.
@@ -89,6 +92,22 @@ stepCounter.totalSteps = 896    // About to set totalSteps to 896   // Added 536
 //If you pass a property that has observers to a function as an in-out parameter, the willSet and didSet observers are always called.
 //This is because of the copy-in copy-out memory model for in-out parameters: The value is always written back to the property at the end of the function.
 
+/* Constant Properties  (borrowed from initializer section) */
+//IMPORTANT: You can assign a value to a constant property at any point during initialization, as long as it is set to a definite value by the time initialization finishes. Once a constant property is assigned a value, it can’t be further modified.
+//IMPORTANT: For class instances, a constant property can be modified during initialization only by the class that introduces it. It cannot be modified by a subclass.
+class SurveyQuestion {
+    let text: String    //Even though the text property is now a constant, it can still be set within the class’s initializer:
+    var response: String?
+    init(text: String) {
+        self.text = text
+    }
+    func ask() {
+        print(text)
+    }
+}
+let beetsQuestion = SurveyQuestion(text: "How about beets?")
+beetsQuestion.ask() // Prints "How about beets?"
+beetsQuestion.response = "I also like beets. (But not with cheese.)"
 
 
 
