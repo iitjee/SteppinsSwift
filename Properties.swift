@@ -109,6 +109,45 @@ let beetsQuestion = SurveyQuestion(text: "How about beets?")
 beetsQuestion.ask() // Prints "How about beets?"
 beetsQuestion.response = "I also like beets. (But not with cheese.)"
 
+/*  Global Variables    */
+//The global and local variables you have encountered in previous chapters have all been stored variables.
+//Stored variables, like stored properties, provide storage for a value of a certain type and allow that value to be set and retrieved.
 
+//However, you can also define computed variables and define observers for stored variables, in either a global or local scope. Computed variables calculate their value, rather than storing it, and they are written in the same way as computed properties.
+//NOTE: Global constants and variables are always computed lazily, in a similar manner to Lazy Stored Properties. Unlike lazy stored properties, global constants and variables do not need to be marked with the lazy modifier.
+
+
+/*  Type Properties */
+//'static' in C
+//Type properties can be stored or computed. 
+//Stored type properties can be variables or constants. Computed type properties are always declared as variable properties, in the same way as computed instance properties.
+
+//Unlike stored instance properties, you must always give stored type properties a default value. This is because the type itself does not have an initializer that can assign a value to a stored type property at initialization time.
+//Stored type properties are lazily initialized on their first access. They are guaranteed to be initialized only once, even when accessed by multiple threads simultaneously, and they do not need to be marked with the lazy modifier.
+
+struct SomeStructure {
+    static var storedTypeProperty = "Some value."
+    static var computedTypeProperty: Int {
+        return 1
+    }
+}
+enum SomeEnumeration {
+    static var storedTypeProperty = "Some value."
+    static var computedTypeProperty: Int {
+        return 6
+    }
+}
+
+//NoTE:  For computed type properties for class types, you can use the class keyword instead to allow subclasses to override the superclass’s implementation.
+class SomeClass {
+    static var storedTypeProperty = "Some value."
+    static var computedTypeProperty: Int {
+        return 27
+    }
+    class var overrideableComputedTypeProperty: Int {
+        return 107
+    }
+}
+//  The computed type property examples above are for read-only computed type properties, but you can also define read-write computed type properties with the same syntax as for computed instance properties.
 
 
