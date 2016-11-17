@@ -124,7 +124,7 @@ if tenEighty === alsoTenEighty {
 
 //If a property marked with the lazy modifier is accessed by multiple threads simultaneously and the property has not yet been initialized, there is no guarantee that the property will be initialized only once.
 
-
+//IMPORTANT: Global constants and variables are always computed lazily, in a similar manner to Lazy Stored Properties. Unlike lazy stored properties, global constants and variables do not need to be marked with the lazy modifier.
 
 
 /*  Static Methods  */
