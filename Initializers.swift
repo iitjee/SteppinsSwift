@@ -12,6 +12,9 @@ https://developer.apple.com/library/content/documentation/Swift/Conceptual/Swift
 - Unlike Objective-C initializers, Swift initializers do not return a value. Their primary role is to ensure that new instances of a type are correctly initialized before they are used for the first time.
 - Instances of class types can also implement a deinitializer, which performs any custom cleanup just before an instance of that class is deallocated.
 
+*/
+
+
 /*  Setting Initial Values for Stored Properties  */
 //In classes and structs, Stored properties cannot be left in an indeterminate state by the time an instance of that class or structure is created.
 //You can set an initial value for a stored property within an initializer, or by assigning a default property value as part of the property’s definition.
@@ -126,6 +129,107 @@ let beetsQuestion = SurveyQuestion(text: "How about beets?")
 beetsQuestion.ask() // Prints "How about beets?"
 beetsQuestion.response = "I also like beets. (But not with cheese.)"
 
+
+
+
+/*  Deinitializers  */
+
+//A deinitializer is called immediately before a class instance is deallocated.
+//Deinitializers are only available on class types
+
+//Swift automatically deallocates your instances when they are no longer needed, to free up resources.
+
+//However, when you are working with your own resources, you might need to perform some additional cleanup yourself.
+//For example, if you create a custom class to open a file and write some data to it, you might need to close the file before the class instance is deallocated.
+//You are not allowed to call a deinitializer yourself.
+
+/*  A good example where you would use deinit   */
+class Player {
+    var coinsInPurse: Int
+    init(coins: Int) {
+        coinsInPurse = Bank.distribute(coins: coins)
+    }
+    func win(coins: Int) {
+        coinsInPurse += Bank.distribute(coins: coins)
+    }
+    deinit {//The deinitializer does not take any parameters and is written without parentheses:
+        Bank.receive(coins: coinsInPurse)
+    }
+}
+
+class Bank {
+    static var coinsInBank = 10_000
+    static func distribute(coins numberOfCoinsRequested: Int) -> Int {
+        let numberOfCoinsToVend = min(numberOfCoinsRequested, coinsInBank)
+        coinsInBank -= numberOfCoinsToVend
+        return numberOfCoinsToVend
+    }
+    static func receive(coins: Int) {
+        coinsInBank += coins
+    }
+}
+
+var playerOne: Player? = Player(coins: 100)
+print("A new player has joined the game with \(playerOne!.coinsInPurse) coins") // Prints "A new player has joined the game with 100 coins"
+print("There are now \(Bank.coinsInBank) coins left in the bank") // Prints "There are now 9900 coins left in the bank"
+
+playerOne!.win(coins: 2_000)    //Because playerOne is an optional, it is qualified with an exclamation mark (!)
+print("PlayerOne won 2000 coins & now has \(playerOne!.coinsInPurse) coins") // Prints "PlayerOne won 2000 coins & now has 2100 coins"
+print("The bank now only has \(Bank.coinsInBank) coins left") // Prints "The bank now only has 7900 coins left"
+
+playerOne = nil //The player has now left the game.
+print("PlayerOne has left the game")    // Prints "PlayerOne has left the game"
+print("The bank now has \(Bank.coinsInBank) coins") // Prints "The bank now has 10000 coins"
+
+//Superclass deinitializers are inherited by their subclasses, and the superclass deinitializer is called automatically at the end of a subclass deinitializer implementation. 
+//Superclass deinitializers are always called, even if a subclass does not provide its own deinitializer.
+
+//Because an instance is not deallocated until after its deinitializer is called, a deinitializer can access all properties of the instance it is called on and can modify its behavior based on those properties 
+//(such as looking up the name of a file that needs to be closed).
+
+
+/*  Default Initializers    */
+//The default initializer for any class or struct simply creates a new instance with all of its properties set to their default values.
+class ShoppingListItem {
+    var name: String?
+    var quantity = 1
+    var purchased = false
+}
+var item = ShoppingListItem()
+
+//Memberwise Initializers for Structure Types
+//The memberwise initializer is a shorthand way to initialize the member properties of new structure instances. Initial values for the properties of the new instance can be passed to the memberwise initializer by name.
+struct Size {
+    var width = 0.0, height = 0.0
+}
+let twoByTwo = Size(width: 2.0, height: 2.0)
+
+
+/*  Initializer Delegation for Value Types  */
+//Initializers can call other initializers to perform part of an instance’s initialization. This process, known as initializer delegation, avoids duplicating code across multiple initializers.
+struct Rect {
+    var origin = Point()
+    var size = Size()
+    init() {}
+    init(origin: Point, size: Size) {
+        self.origin = origin
+        self.size = size
+    }
+    init(center: Point, size: Size) {
+        let originX = center.x - (size.width / 2)
+        let originY = center.y - (size.height / 2)
+        self.init(origin: Point(x: originX, y: originY), size: size)
+    }
+}
+/*1*/let basicRect = Rect()  // basicRect's origin is (0.0, 0.0) and its size is (0.0, 0.0)
+/*2*/let originRect = Rect(origin: Point(x: 2.0, y: 2.0),
+                      size: Size(width: 5.0, height: 5.0))  // originRect's origin is (2.0, 2.0) and its size is (5.0, 5.0)
+/*3*/let centerRect = Rect(center: Point(x: 4.0, y: 4.0),
+                      size: Size(width: 3.0, height: 3.0))  // centerRect's origin is (2.5, 2.5) and its size is (3.0, 3.0)
+
+//See how initializer delegation is used when centerRect is initialized using 3rd initializer
+
+/*  Designated Initializers and Convenience Initializers  */
 
 
 
