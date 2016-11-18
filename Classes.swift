@@ -1,5 +1,8 @@
 /*
 
+Classes are "class types"(aka "reference types") whereas struct and enums are "value types"
+Value types (structures and enumerations) do not support inheritance,
+
 Terminology:
 field/member      = Stored Property (in Apple)   -> can be provided by classes, structures, and enumerations.
 property(get/set) = Computed Property (in Apple) -> provided only by classes and structures
