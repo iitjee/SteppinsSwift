@@ -1,3 +1,16 @@
+/*  
+https://developer.apple.com/library/content/documentation/Swift/Conceptual/Swift_Programming_Language/Properties.html#//apple_ref/doc/uid/TP40014097-CH14-ID254
+
+Properties Classification:
+    1. Instance properties
+    2. Type properties (aka class properties (I think) or static variables)
+
+
+*/
+
+
+
+
 /*  Computed Properties */
 //In addition to stored properties, classes, structures, and enumerations can define computed properties, which do not actually store a value. 
 //Instead, they provide a getter and an optional setter to retrieve and set other properties and values indirectly.
@@ -138,16 +151,37 @@ enum SomeEnumeration {
     }
 }
 
-//NoTE:  For computed type properties for class types, you can use the class keyword instead to allow subclasses to override the superclass’s implementation.
 class SomeClass {
     static var storedTypeProperty = "Some value."
     static var computedTypeProperty: Int {
         return 27
     }
+    
+    //NOTE:  For computed type properties for class types, you can use the class keyword instead to allow subclasses 
+    //to override the superclass’s implementation.
     class var overrideableComputedTypeProperty: Int {
         return 107
     }
 }
 //  The computed type property examples above are for read-only computed type properties, but you can also define read-write computed type properties with the same syntax as for computed instance properties.
 
+/*  Querying and Setting Type Properties    */
+struct AudioChannel {
+    static let thresholdLevel = 10  //It's a good idea to store constant properties in class as 'static let' :)
+    static var maxInputLevelForAllChannels = 0
+    var currentLevel: Int = 0 { //The currentLevel property has a didSet property observer to check the value of currentLevel whenever it is set. This observer performs two checks
+        didSet {
+            if currentLevel > AudioChannel.thresholdLevel {
+                // cap the new audio level to the threshold level
+                currentLevel = AudioChannel.thresholdLevel  
+                //The didSet observer sets currentLevel to a different value.
+                //This does not, however, cause the observer to be called again.
+            }
+            if currentLevel > AudioChannel.maxInputLevelForAllChannels {
+                // store this as the new overall maximum input level
+                AudioChannel.maxInputLevelForAllChannels = currentLevel
+            }
+        }
+    }
+}
 
