@@ -23,4 +23,6 @@ Center the label by choosing Horizontally in Container in the Align menu.
 ^ This you probably don't expect
 
 Even in the final app, the images in detail vc are a bit shaking when expanded. Don't worry
+(You can get around this by commenting tableView.scrollToRow(at: indexPath, at: .top, animated: true) but other problem is there.
+(you can make animated: false but still there is prbs)
 */
