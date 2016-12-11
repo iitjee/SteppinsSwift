@@ -48,6 +48,7 @@ for character in "Dog!🐶".characters {
     
 /* Legnth Of String */
 myString.characters.count
+//(String class doesn't have .length property or something like that)    
     
 /* String interpolation is a way to construct a new String value from a mix of constants, variables, literals, and expressions by including their values inside a string literal. 
 Each item that you insert into the string literal is wrapped in a pair of parentheses, prefixed by a backslash: */
