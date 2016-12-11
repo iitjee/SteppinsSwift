@@ -3,7 +3,7 @@
   2. myCustomTableView.dequeueReusableCell(withIdentifier:cellId1, for: indexPath) returns an optional cell
 
 
-
+  0. If you've textview, make sure you uncheck User Interaction Enabled, which will allow touches to pass through the text view and trigger a selection of the cell itself.
 */
 
 
@@ -30,6 +30,9 @@
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cellId1 = "<#CellId1#>"
         var cell = tableView.dequeueReusableCell(withIdentifier:cellId1, for: indexPath)
+      
+      //(var cell = tableView.dequeueReusableCell(withIdentifier:cellId1, for: indexPath) as! MyCustomTableViewCell )
+      
         if cell==nil {
             cell = UITableViewCell.init(style: .default, reuseIdentifier: cellId1)
         }
@@ -40,3 +43,16 @@
         return cell
     } 
     
+/*  or  */
+class ArtistDetailViewController: UIViewController {
+  //...
+}
+
+extension ArtistDetailViewController: UITableViewDataSource {
+  //func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell 
+}
+
+extension ArtistDetailViewController: UITableViewDelegate {
+  //func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
+}
