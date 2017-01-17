@@ -1,0 +1,2 @@
+Kickstarter required icloud which req developer account. That thing can be seen only after restarting xcode. or else you get a 
+very general error saying 'your account doesn't have enough perms'
