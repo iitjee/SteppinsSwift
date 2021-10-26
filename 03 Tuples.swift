@@ -1,4 +1,6 @@
-/*      
+/*  So the tuple, in other words is a list of two or more things, they don't have to be the same types, surrounding by parentheses. The tuple is treated as a single variable or 
+constant, so in this case http404Error is going to point at the single tuple, not at either of the components of the tuple. It's as if I had a struct that had two fields in it, 
+but the struct is effectively created implicitly by the compiler. Now having initialized the variable, I can access the fields if I want to.    
 
 
 
