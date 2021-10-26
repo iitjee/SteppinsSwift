@@ -54,5 +54,22 @@ for var i=0; i<shoppingList.count; ++i {    //very old style
 
 
 
+// 2 dimensional array of arrays of Ints 
+var arr = [[Int]]() 
+ 
+//or
+
+
+// 2 dimensional array of arrays of Ints 
+var arr: [[Int]] = []
+
+//or
+
+// 2 dimensional array of arrays of Ints set to 0. Arrays size is 10x5
+var arr = Array(count: 3, repeatedValue: Array(count: 2, repeatedValue: 0))
+// ...and for Swift 3+:
+var arr = Array(repeating: Array(repeating: 0, count: 2), count: 3)
+
+
 
 
