@@ -21,12 +21,16 @@ var airports = ["YYZ": "Toronto Pearson", "DUB": "Dublin"]  //Array Literal Synt
 /*Checking Emptiness*/  airports.isEmpty
 /* All keys */  [String](airports.keys)
 /* All values */ [String](airports.values)
+//Note: airport.keys and airport.values are not exactly arrays. They return iteratorable objects used only while iterating.
+//To get an array, use [String}(airports.keys)
+
 
 /*Updating Value  (two ways)  */
 airports["LHR"] = "London Heathrow"
 airports.updateValue("London Heathrow", forKey: "LHR")
 
-//Note: Unlike a subscript, however, the updateValue(_:forKey:) method returns the old value after performing an update. This enables you to check whether or not an update took place.
+//Note: Unlike a subscript, however, the updateValue(_:forKey:) method returns the old value after performing an update. This enables you to check whether or not an update took 
+place.
 if let oldValue = airports.updateValue("Dublin Airport", forKey: "DUB") {
     print("The old value for DUB was \(oldValue).")
 } // Prints "The old value for DUB was Dublin."
@@ -60,7 +64,6 @@ for airportName in airports.values {
     print("Airport name: \(airportName)")
 }
 
-//Note: airport.keys and airport.values are not exactly arrays. They return iteratorable objects used only while iterating. To get an array, use [String}(airports.keys)
 
 
 
