@@ -9,8 +9,12 @@ property(get/set) = Computed Property (in Apple) -> provided only by classes and
                   = Type Property (in Apple)     ->    
 
 -> Stored properties store const and var values as part of an instance, whereas computed properties calculate (rather than store) a value. 
--> Stored and computed properties are usually associated with instances of a particular type. However, properties can also be associated with the type itself. Such properties are known as TYPE PROPERTIES.
--> In addition, you can define PROPERTY OBSERVERS to monitor changes in a property’s value, which you can respond to with custom actions. Property observers can be added to stored properties you define yourself, and also to properties that a subclass inherits from its superclass.
+
+-> Stored and computed properties are usually associated with instances of a particular type. 
+However, properties can also be associated with the type itself. Such properties are known as TYPE PROPERTIES.
+
+-> In addition, you can define PROPERTY OBSERVERS to monitor changes in a property’s value, which you can respond to with custom actions.
+Property observers can be added to stored properties you define yourself, and also to properties that a subclass inherits from its superclass.
 
 
 
